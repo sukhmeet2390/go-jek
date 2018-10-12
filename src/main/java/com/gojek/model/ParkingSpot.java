@@ -1,32 +1,32 @@
 package com.gojek.model;
 
 public class ParkingSpot implements Comparable<ParkingSpot> {
-    private Long spotNumber;
+    private int spotNumber;
     private boolean isVacant;
     private Vehicle vehicle;
     private ParkingSpotSize spotSize = ParkingSpotSize.MEDIUM;
 
-    public ParkingSpot(Long spotNumber, boolean isVacant, Vehicle vehicle, ParkingSpotSize spotSize) {
+    public ParkingSpot(int spotNumber, Vehicle vehicle) {
         this.spotNumber = spotNumber;
-        this.isVacant = isVacant;
+        this.vehicle = vehicle;
+    }
+
+    public ParkingSpot(int spotNumber, Vehicle vehicle, ParkingSpotSize spotSize) {
+        this.spotNumber = spotNumber;
         this.vehicle = vehicle;
         this.spotSize = spotSize;
     }
 
-    public Long getSpotNumber() {
+    public int getSpotNumber() {
         return spotNumber;
     }
 
-    public void setSpotNumber(Long spotNumber) {
+    public void setSpotNumber(int spotNumber) {
         this.spotNumber = spotNumber;
     }
 
     public boolean isVacant() {
-        return isVacant;
-    }
-
-    public void setVacant(boolean vacant) {
-        isVacant = vacant;
+        return this.vehicle == null;
     }
 
     public Vehicle getVehicle() {
@@ -46,6 +46,6 @@ public class ParkingSpot implements Comparable<ParkingSpot> {
     }
 
     public int compareTo(ParkingSpot spot) {
-        return this.spotNumber.compareTo(spot.spotNumber);
+        return this.spotNumber - spot.spotNumber;
     }
 }
