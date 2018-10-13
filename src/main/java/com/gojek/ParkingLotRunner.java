@@ -9,7 +9,6 @@ import java.io.File;
 
 public class ParkingLotRunner {
     public static void main(String[] args) {
-        System.out.println("args = " + args);
         ParkingLot parkingLot = new DefaultParkingLot();
         if (args.length == 0) {
             new TerminalConsumer(parkingLot).execute();

@@ -2,3 +2,16 @@
 # Complete bin/setup so that after it is
 # run, bin/parking_lot can be used to launch
 # it.
+
+#!/bin/sh
+cd ../
+mvn clean compile test install
+cp target/parking_lot-1.0-SNAPSHOT.jar .
+
+if [ $# -eq  0 ]
+then
+    java -jar parking_lot-1.0-SNAPSHOT.jar
+else
+    java -jar parking_lot-1.0-SNAPSHOT.jar $1
+fi
+rm parking_lot-1.0-SNAPSHOT.jar
