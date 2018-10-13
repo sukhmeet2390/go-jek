@@ -63,10 +63,8 @@ public class DefaultParkingLot implements ParkingLot {
                     System.out.println((i + 1) + "\t" + car.getRegistrationNumber() + "\t" + car.getColor());
                 }
             }
-            System.out.println();
         } else {
             System.out.println("Parking lot is empty");
-            System.out.println();
         }
     }
 
