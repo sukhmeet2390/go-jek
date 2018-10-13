@@ -8,10 +8,10 @@ import java.io.InputStreamReader;
 
 
 public class TerminalConsumer {
-    private CommandHandler commandHandler;
+    private CommandConsumer commandConsumer;
 
     public TerminalConsumer(ParkingLot parkingLot) {
-        this.commandHandler = new CommandHandler(parkingLot);
+        this.commandConsumer = new CommandConsumer(parkingLot);
     }
 
     public void execute() {
@@ -20,7 +20,7 @@ public class TerminalConsumer {
         try {
             while ((command = reader.readLine()) != null) {
                 final String[] split = command.split(" ");
-                commandHandler.handleCommand(split[0], split);
+                commandConsumer.handleCommand(split[0], split);
             }
             reader.close();
         } catch (IOException e) {

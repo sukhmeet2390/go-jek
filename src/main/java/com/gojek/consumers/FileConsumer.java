@@ -9,18 +9,18 @@ import java.io.IOException;
 
 public class FileConsumer {
     private final File file;
-    private CommandHandler commandHandler;
+    private CommandConsumer commandConsumer;
 
     public FileConsumer(File file, ParkingLot parkingLot) {
         this.file = file;
-        this.commandHandler = new CommandHandler(parkingLot);
+        this.commandConsumer = new CommandConsumer(parkingLot);
     }
 
     public void execute() {
         final String[] commands = getCommands();
         for (String command : commands) {
             final String[] cmd = command.split(" ");
-            commandHandler.handleCommand(cmd[0], cmd);
+            commandConsumer.handleCommand(cmd[0], cmd);
         }
     }
 

@@ -7,10 +7,10 @@ import com.gojek.service.ParkingLot;
 
 import java.util.ArrayList;
 
-public class CommandHandler {
+public class CommandConsumer {
     private final ParkingLot parkingLot;
 
-    public CommandHandler(ParkingLot parkingLot) {
+    public CommandConsumer(ParkingLot parkingLot) {
         this.parkingLot = parkingLot;
     }
 
