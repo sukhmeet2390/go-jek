@@ -19,12 +19,16 @@ public class DefaultParkingLot implements ParkingLot {
     public void create(int size) {
         this.availableSlot = size;
         this.maxSize = size;
-        parkedMap = new HashMap<Integer, Vehicle>(size);
-        registrationMap = new HashMap<String, ParkingSpot>(size);
-        spots = new PriorityQueue<ParkingSpot>(size);
+        parkedMap = new HashMap<>(size);
+        registrationMap = new HashMap<>(size);
+        spots = new PriorityQueue<>(size);
         for (int i = 0; i < size; i++) {
             spots.add(new ParkingSpot(i, null));
         }
+    }
+
+    public int getCapacity() {
+        return spots.size();
     }
 
     public ParkingSpot park(Vehicle v) throws ParkingSpotNotAvailableException {
@@ -32,7 +36,10 @@ public class DefaultParkingLot implements ParkingLot {
             if (availableSlot == 0) {
                 throw new ParkingSpotNotAvailableException("No parking spot available !!");
             } else {
+                ParkingSpot parkingSpot = registrationMap.get(v.getRegistrationNumber());
+                if (parkingSpot != null) return parkingSpot;
                 final ParkingSpot slot = spots.poll();
+                slot.setVehicle(v);
                 parkedMap.put(slot.getSpotNumber(), v);
                 registrationMap.put(v.getRegistrationNumber(), slot);
                 availableSlot--;
@@ -42,7 +49,6 @@ public class DefaultParkingLot implements ParkingLot {
     }
 
     public void unpark(int spotId) {
-        spotId--;
         synchronized (this) {
             if (parkedMap.get(spotId) != null) {
                 Vehicle remove = parkedMap.remove(spotId);
@@ -74,7 +80,7 @@ public class DefaultParkingLot implements ParkingLot {
     }
 
     public ArrayList<Integer> getParkingSpotsForColor(String color) {
-        ArrayList<Integer> values = new ArrayList<Integer>();
+        ArrayList<Integer> values = new ArrayList<>();
         for (Map.Entry<Integer, Vehicle> entry : parkedMap.entrySet()) {
             if (entry.getValue().getColor().equalsIgnoreCase(color)) {
                 values.add(entry.getKey());
@@ -84,7 +90,7 @@ public class DefaultParkingLot implements ParkingLot {
     }
 
     public ArrayList<String> getRegistrationNumberForColor(String color) {
-        ArrayList<String> values = new ArrayList<String>();
+        ArrayList<String> values = new ArrayList<>();
         for (Map.Entry<Integer, Vehicle> entry : parkedMap.entrySet()) {
             if (entry.getValue().getColor().equalsIgnoreCase(color)) {
                 values.add(entry.getValue().getRegistrationNumber());

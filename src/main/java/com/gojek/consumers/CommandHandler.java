@@ -111,7 +111,7 @@ public class CommandHandler {
     }
 
     private void handleUnpark(int index) {
-        parkingLot.unpark(index);
+        parkingLot.unpark(index-1);
         System.out.println("Slot number " + (index) + " is free");
     }
 

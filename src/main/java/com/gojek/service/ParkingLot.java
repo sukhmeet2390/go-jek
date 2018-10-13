@@ -13,6 +13,8 @@ public interface ParkingLot {
 
     void create(int size);
 
+    int getCapacity();
+
     void status();
 
     ParkingSpot getParkingSpotForRegistration(final String reg);
