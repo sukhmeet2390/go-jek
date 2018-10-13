@@ -2,12 +2,22 @@ package com.gojek.service;
 
 import com.gojek.model.ParkingSpot;
 import com.gojek.model.Vehicle;
-import exception.ParkingSpotNotAvailableException;
+import com.gojek.exception.ParkingSpotNotAvailableException;
+
+import java.util.ArrayList;
 
 public interface ParkingLot {
-    public ParkingSpot park(Vehicle v) throws ParkingSpotNotAvailableException;
+    ParkingSpot park(Vehicle v) throws ParkingSpotNotAvailableException;
 
-    public void unpark(ParkingSpot spot);
+    void unpark(int spotId);
 
-    public void create(int size);
+    void create(int size);
+
+    void status();
+
+    ParkingSpot getParkingSpotForRegistration(final String reg);
+
+    ArrayList<Integer> getParkingSpotsForColor(final String color);
+
+    ArrayList<String> getRegistrationNumberForColor(final String color);
 }
